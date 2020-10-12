@@ -1,5 +1,7 @@
 # README
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3b6818127eca410e8e0081373d627def)](https://app.codacy.com/gh/yousefokka/testcodact?utm_source=github.com&utm_medium=referral&utm_content=yousefokka/testcodact&utm_campaign=Badge_Grade)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
