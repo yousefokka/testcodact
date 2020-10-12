@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  jobtitle: MyString
+  addree: MyString
+  location: MyString
+  Gander: MyString
+  qualifiction: MyString
+  mobile: MyString
+  interstingfield: MyString
+  indestry: MyString
+
+two:
+  name: MyString
+  jobtitle: MyString
+  addree: MyString
+  location: MyString
+  Gander: MyString
+  qualifiction: MyString
+  mobile: MyString
+  interstingfield: MyString
+  indestry: MyString

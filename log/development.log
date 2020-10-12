@@ -1,0 +1,486 @@
+  [1m[35m (0.4ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (18.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('3230845269281444115', 0)[0m
+  [1m[35m (3.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to DeviseCreateUsers (20200503135200)
+  [1m[35m (19.4ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (16.7ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (16.9ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) [0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200503135200')[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAuthenticationTokenToUsers (20200503140208)
+  [1m[35m (35.7ms)[0m  [1m[35mALTER TABLE `users` ADD `auth_token` varchar(255)[0m
+  [1m[35m (28.3ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_auth_token`  ON `users` (`auth_token`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200503140208')[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJobs (20200503143836)
+  [1m[35m (23.9ms)[0m  [1m[35mCREATE TABLE `jobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `jtype` varchar(255), `catagory` varchar(255), `address` varchar(255), `salary` varchar(255), `gander` varchar(255), `country` varchar(255), `city` varchar(255), `qualification` varchar(255), `experience` varchar(255), `description` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200503143836')[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateIdeas (20200503143938)
+  [1m[35m (21.8ms)[0m  [1m[35mCREATE TABLE `ideas` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `Management` varchar(255), `ideacatagory` varchar(255), `address` varchar(255), `funding` varchar(255), `ideaDescription` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200503143938')[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdToJobs (20200507090121)
+  [1m[35m (22.5ms)[0m  [1m[35mALTER TABLE `jobs` ADD `user_id` bigint[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE  INDEX `index_jobs_on_user_id`  ON `jobs` (`user_id`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200507090121')[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserToIdeas (20200519194737)
+  [1m[35m (17.6ms)[0m  [1m[35mALTER TABLE `ideas` ADD `user_id` bigint[0m
+  [1m[35m (19.2ms)[0m  [1m[35mCREATE  INDEX `index_ideas_on_user_id`  ON `ideas` (`user_id`) [0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200519194737')[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSponsers (20200519203751)
+  [1m[35m (20.5ms)[0m  [1m[35mCREATE TABLE `sponsers` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `Address` varchar(255), `Catagory` varchar(255), `Gander` varchar(255), `Funding` varchar(255), `Typemanagment` varchar(255), `phone` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200519203751')[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEmployees (20200519204310)
+  [1m[35m (21.9ms)[0m  [1m[35mCREATE TABLE `employees` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `jobtybe` varchar(255), `jobcategory` varchar(255), `address` varchar(255), `salary` varchar(255), `Gander` varchar(255), `Qualifcation` varchar(255), `mobile` varchar(255), `Degree` varchar(255), `Indestry` varchar(255), `Exprense` int, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200519204310')[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdToSponsers (20200526131644)
+  [1m[35m (13.8ms)[0m  [1m[35mALTER TABLE `sponsers` ADD `user_id` bigint[0m
+  [1m[35m (17.3ms)[0m  [1m[35mCREATE  INDEX `index_sponsers_on_user_id`  ON `sponsers` (`user_id`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200526131644')[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdToEmployees (20200526131703)
+  [1m[35m (18.9ms)[0m  [1m[35mALTER TABLE `employees` ADD `user_id` bigint[0m
+  [1m[35m (14.5ms)[0m  [1m[35mCREATE  INDEX `index_employees_on_user_id`  ON `employees` (`user_id`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200526131703')[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateIdeamakers (20200526211811)
+  [1m[35m (19.7ms)[0m  [1m[35mCREATE TABLE `ideamakers` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `jobtitle` varchar(255), `addree` varchar(255), `location` varchar(255), `Gander` varchar(255), `qualifiction` varchar(255), `mobile` varchar(255), `interstingfield` varchar(255), `indestry` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200526211811')[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdToideamakers (20200526211859)
+  [1m[35m (16.0ms)[0m  [1m[35mALTER TABLE `ideamakers` ADD `user_id` bigint[0m
+  [1m[35m (17.8ms)[0m  [1m[35mCREATE  INDEX `index_ideamakers_on_user_id`  ON `ideamakers` (`user_id`) [0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200526211859')[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSubmittings (20200611052522)
+  [1m[35m (31.2ms)[0m  [1m[35mCREATE TABLE `submittings` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `job_id` bigint, `user_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_submittings_on_job_id`  (`job_id`),  INDEX `index_submittings_on_user_id`  (`user_id`))[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200611052522')[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFunds (20200616004322)
+  [1m[35m (29.2ms)[0m  [1m[35mCREATE TABLE `funds` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `idea_id` bigint, `user_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_funds_on_idea_id`  (`idea_id`),  INDEX `index_funds_on_user_id`  (`user_id`))[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200616004322')[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJobresponces (20200616062239)
+  [1m[35m (23.5ms)[0m  [1m[35mCREATE TABLE `jobresponces` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `submitting_id` bigint, `Status` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_jobresponces_on_submitting_id`  (`submitting_id`))[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200616062239')[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DescriptionChaneCoulmnType (20200720142355)
+  [1m[35m (44.4ms)[0m  [1m[35mALTER TABLE `jobs` CHANGE `description` `description` text DEFAULT NULL[0m
+  [1m[35m (37.1ms)[0m  [1m[35mALTER TABLE `jobs` DROP COLUMN `city`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200720142355')[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DescariptionChaneCoulmnType (20200720142748)
+  [1m[35m (51.3ms)[0m  [1m[35mALTER TABLE `ideas` CHANGE `ideaDescription` `ideaDescription` text DEFAULT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200720142748')[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddSomeCoulmnModify (20200720145338)
+  [1m[35m (37.6ms)[0m  [1m[35mALTER TABLE `ideamakers` DROP COLUMN `indestry`[0m
+  [1m[35m (39.5ms)[0m  [1m[35mALTER TABLE `ideamakers` DROP COLUMN `jobtitle`[0m
+  [1m[35m (42.1ms)[0m  [1m[35mALTER TABLE `ideamakers` DROP COLUMN `location`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200720145338')[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddSomeNewCoulmnModify (20200720145638)
+  [1m[35m (14.4ms)[0m  [1m[35mALTER TABLE `sponsers` ADD `sexprience` varchar(255)[0m
+  [1m[35m (15.9ms)[0m  [1m[35mALTER TABLE `sponsers` ADD `sponcerBio` text[0m
+  [1m[35m (16.9ms)[0m  [1m[35mALTER TABLE `employees` ADD `employeeBio` text[0m
+  [1m[35m (23.5ms)[0m  [1m[35mALTER TABLE `employees` ADD `Datafrom` varchar(255)[0m
+  [1m[35m (22.0ms)[0m  [1m[35mALTER TABLE `employees` ADD `Datato` varchar(255)[0m
+  [1m[35m (16.4ms)[0m  [1m[35mALTER TABLE `ideamakers` ADD `ideamakerBio` text[0m
+  [1m[35m (18.0ms)[0m  [1m[35mALTER TABLE `ideamakers` ADD `Website` varchar(255)[0m
+  [1m[35m (16.4ms)[0m  [1m[35mALTER TABLE `ideamakers` ADD `size` int[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200720145638')[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveColumnFromJob (20200722123319)
+  [1m[35m (37.7ms)[0m  [1m[35mALTER TABLE `jobs` DROP COLUMN `country`[0m
+  [1m[35m (9.4ms)[0m  [1m[35mALTER TABLE `sponsers` CHANGE `sexprience` `exprience` varchar(255) DEFAULT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200722123319')[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateJobfavourits (20200722131758)
+  [1m[35m (28.3ms)[0m  [1m[35mCREATE TABLE `jobfavourits` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint, `job_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_jobfavourits_on_user_id`  (`user_id`),  INDEX `index_jobfavourits_on_job_id`  (`job_id`))[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200722131758')[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateIdeafavourits (20200723115104)
+  [1m[35m (25.6ms)[0m  [1m[35mCREATE TABLE `ideafavourits` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint, `idea_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_ideafavourits_on_user_id`  (`user_id`),  INDEX `index_ideafavourits_on_idea_id`  (`idea_id`))[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200723115104')[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DropTableJobResponce (20200728172627)
+  [1m[35m (13.1ms)[0m  [1m[35mDROP TABLE `jobresponces`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200728172627')[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCoulmnToSubmitting (20200728184102)
+  [1m[35m (16.1ms)[0m  [1m[35mALTER TABLE `submittings` ADD `Responce` varchar(255) DEFAULT 'Waiting'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200728184102')[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCoulmnToIdeaMaker (20200728185259)
+  [1m[35m (18.7ms)[0m  [1m[35mALTER TABLE `ideamakers` ADD `ownernaem` varchar(255)[0m
+  [1m[35m (20.5ms)[0m  [1m[35mALTER TABLE `ideamakers` ADD `ownerphono` varchar(255)[0m
+  [1m[35m (16.8ms)[0m  [1m[35mALTER TABLE `ideamakers` ADD `owneraddress` varchar(255)[0m
+  [1m[35m (15.4ms)[0m  [1m[35mALTER TABLE `ideamakers` ADD `companyemail` varchar(255)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200728185259')[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2020-08-06 14:21:49.274625', '2020-08-06 14:21:49.274625')[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('3230845269281444115')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started POST "/api/v1/users" for ::1 at 2020-08-06 17:32:53 +0200
+  [1m[35m (0.3ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"company@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`auth_token` IS NULL LIMIT 1[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'company@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`auth_token` = 'yBQ4URUrnKkahPBr9xXb' LIMIT 1[0m
+  ↳ app/models/user.rb:22:in `generate_authentication_token!'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `created_at`, `updated_at`, `auth_token`) VALUES ('company@gmail.com', '$2a$11$iCOSCoJvHthS3MK4e33zledFJV9BNj/TGp/6EK43ihlF5aWIzW/ea', '2020-08-06 15:32:54.018453', '2020-08-06 15:32:54.018453', 'yBQ4URUrnKkahPBr9xXb')[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+Completed 201 Created in 143ms (Views: 0.3ms | ActiveRecord: 9.4ms | Allocations: 15522)
+
+
+Started POST "/api/v1/users/3/profile" for ::1 at 2020-08-06 17:33:09 +0200
+Processing by Api::V1::ProfilesController#create as */*
+  Parameters: {"profile_type"=>3, "ideamaker"=>{"name"=>"instabug"}, "id"=>"3", "profile"=>{"profile_type"=>3, "ideamaker"=>{"name"=>"instabug"}}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+Filter chain halted as :authenticate_with_token! rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 944)
+
+
+Started POST "/api/v1/users/3/profile" for ::1 at 2020-08-06 17:33:14 +0200
+Processing by Api::V1::ProfilesController#create as */*
+  Parameters: {"profile_type"=>3, "ideamaker"=>{"name"=>"instabug"}, "id"=>"3", "profile"=>{"profile_type"=>3, "ideamaker"=>{"name"=>"instabug"}}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = 'yBQ4URUrnKkahPBr9xXb' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:15:in `prepare_user'
+Completed 404 Not Found in 11ms (ActiveRecord: 0.9ms | Allocations: 1481)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=3):
+  
+app/controllers/application_controller.rb:15:in `prepare_user'
+Started POST "/api/v1/users/1/profile" for ::1 at 2020-08-06 17:33:22 +0200
+Processing by Api::V1::ProfilesController#create as */*
+  Parameters: {"profile_type"=>3, "ideamaker"=>{"name"=>"instabug"}, "id"=>"1", "profile"=>{"profile_type"=>3, "ideamaker"=>{"name"=>"instabug"}}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = 'yBQ4URUrnKkahPBr9xXb' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:15:in `prepare_user'
+  [1m[36mSponser Load (0.6ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[36mEmployee Load (0.5ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[36mIdeamaker Load (0.6ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/profiles_controller.rb:23:in `create'
+  [1m[36mIdeamaker Create (0.4ms)[0m  [1m[32mINSERT INTO `ideamakers` (`name`, `created_at`, `updated_at`, `user_id`) VALUES ('instabug', '2020-08-06 15:33:22.377565', '2020-08-06 15:33:22.377565', 1)[0m
+  ↳ app/controllers/api/v1/profiles_controller.rb:23:in `create'
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/profiles_controller.rb:23:in `create'
+Completed 201 Created in 56ms (Views: 0.4ms | ActiveRecord: 11.2ms | Allocations: 28020)
+
+
+Started POST "/api/v1/jobs" for ::1 at 2020-08-06 17:34:09 +0200
+Processing by Api::V1::JobsController#create as */*
+  Parameters: {"title"=>"new job", "job"=>{"title"=>"new job"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = 'yBQ4URUrnKkahPBr9xXb' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mSponser Load (0.5ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:33:in `user_type'
+  [1m[36mEmployee Load (0.5ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:34:in `user_type'
+  [1m[36mIdeamaker Load (0.5ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:35:in `user_type'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:20:in `create'
+  [1m[36mJob Create (0.5ms)[0m  [1m[32mINSERT INTO `jobs` (`title`, `created_at`, `updated_at`, `user_id`) VALUES ('new job', '2020-08-06 15:34:09.748977', '2020-08-06 15:34:09.748977', 1)[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:20:in `create'
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:20:in `create'
+Completed 201 Created in 43ms (Views: 0.5ms | ActiveRecord: 9.0ms | Allocations: 16930)
+
+
+Started GET "/api/v1/jobs" for ::1 at 2020-08-06 17:34:13 +0200
+Processing by Api::V1::JobsController#index as */*
+  Parameters: {"title"=>"new job", "job"=>{"title"=>"new job"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = 'yBQ4URUrnKkahPBr9xXb' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.4ms | Allocations: 2906)
+
+
+  
+NoMethodError (undefined method `Jobs' for #<User:0x000056094520eaf0>
+Did you mean?  jobs=):
+  
+app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Started GET "/api/v1/jobs" for ::1 at 2020-08-06 17:34:34 +0200
+Processing by Api::V1::JobsController#index as */*
+  Parameters: {"title"=>"new job", "job"=>{"title"=>"new job"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = 'yBQ4URUrnKkahPBr9xXb' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT `jobs`.* FROM `jobs` WHERE `jobs`.`user_id` = 1[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:8:in `index'
+Completed 200 OK in 24ms (Views: 11.4ms | ActiveRecord: 5.6ms | Allocations: 17407)
+
+
+Started GET "/api/v1/jobs" for ::1 at 2020-08-06 17:42:20 +0200
+  [1m[35m (0.4ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Api::V1::JobsController#index as */*
+  Parameters: {"title"=>"new job", "job"=>{"title"=>"new job"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = 'yBQ4URUrnKkahPBr9xXb' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mJob Load (0.7ms)[0m  [1m[34mSELECT `jobs`.* FROM `jobs` WHERE `jobs`.`user_id` = 1[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:8:in `index'
+Completed 200 OK in 30ms (Views: 10.4ms | ActiveRecord: 7.0ms | Allocations: 23268)
+
+
+Started GET "/api/v1/jobs" for ::1 at 2020-08-06 17:44:50 +0200
+  [1m[35m (0.3ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Api::V1::JobsController#index as */*
+  Parameters: {"title"=>"new job", "job"=>{"title"=>"new job"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 2.0ms | Allocations: 545)
+
+
+  
+NoMethodError (undefined method `jobs' for nil:NilClass):
+  
+app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Started GET "/api/v1/jobs" for ::1 at 2020-08-06 17:45:00 +0200
+Processing by Api::V1::JobsController#index as */*
+  Parameters: {"title"=>"new job", "job"=>{"title"=>"new job"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = 'yBQ4URUrnKkahPBr9xXb' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mJob Load (0.6ms)[0m  [1m[34mSELECT `jobs`.* FROM `jobs` WHERE `jobs`.`user_id` = 1[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:8:in `index'
+Completed 200 OK in 29ms (Views: 9.8ms | ActiveRecord: 5.2ms | Allocations: 23250)
+
+
+  [1m[35m (8.0ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('3230845269281444115', 0)[0m
+  [1m[35m (4.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to AddCoulmnToFund (20200809014156)
+  [1m[35m (20.8ms)[0m  [1m[35mALTER TABLE `funds` ADD `Responce` varchar(255) DEFAULT 'Waiting'[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200809014156')[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('3230845269281444115')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started POST "/api/v1/users" for ::1 at 2020-08-09 23:29:28 +0200
+  [1m[35m (1.3ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"email"=>"company1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`auth_token` IS NULL LIMIT 1[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'company1@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/models/user.rb:22:in `generate_authentication_token!'
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `created_at`, `updated_at`, `auth_token`) VALUES ('company1@gmail.com', '$2a$11$FVF37.wDctepsQGVHZ.Ux.2OMm1JvMXRPds3SmAwQqoh1vQQLrKoG', '2020-08-09 21:29:29.563359', '2020-08-09 21:29:29.563359', '1RpWp_d_cxT6NmyHY4T6')[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+  [1m[35m (7.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:12:in `create'
+Completed 201 Created in 727ms (Views: 2.7ms | ActiveRecord: 28.1ms | Allocations: 15523)
+
+
+Started POST "/api/v1/users/2/profile" for ::1 at 2020-08-09 23:30:34 +0200
+Processing by Api::V1::ProfilesController#create as */*
+  Parameters: {"profile_type"=>3, "ideamaker"=>{"name"=>"instabug"}, "id"=>"2", "profile"=>{"profile_type"=>3, "ideamaker"=>{"name"=>"instabug"}}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:15:in `prepare_user'
+  [1m[36mSponser Load (1.4ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[36mEmployee Load (1.3ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[36mIdeamaker Load (1.3ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+Completed 422 Unprocessable Entity in 294ms (Views: 1.7ms | ActiveRecord: 25.6ms | Allocations: 39527)
+
+
+Started POST "/api/v1/users/2/profile" for ::1 at 2020-08-09 23:37:04 +0200
+  [1m[35m (3.9ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by Api::V1::ProfilesController#create as */*
+  Parameters: {"profile_type"=>3, "ideamaker"=>{"name"=>"instabug", "addree"=>"caire", "Gander"=>"male", "mobile"=>"002151061001310", "interstingfield"=>"gdfdgdfg0", "ideamakerBio"=>"ssdfasdasdasdasdasdsada", "Website"=>"dwqdawdasdasdasdasd", "size"=>"5", "ownernaem"=>"asdasdasdas", "ownerphono"=>"asdasdasdasd", "owneraddress"=>"dasdasdasdasdasdas", "companyemail"=>"sadasdsadasdasdasd"}, "id"=>"2", "profile"=>{"profile_type"=>3, "ideamaker"=>{"name"=>"instabug", "addree"=>"caire", "Gander"=>"male", "mobile"=>"002151061001310", "interstingfield"=>"gdfdgdfg0", "ideamakerBio"=>"ssdfasdasdasdasdasdsada", "Website"=>"dwqdawdasdasdasdasd", "size"=>"5", "ownernaem"=>"asdasdasdas", "ownerphono"=>"asdasdasdasd", "owneraddress"=>"dasdasdasdasdasdas", "companyemail"=>"sadasdsadasdasdasd"}}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:15:in `prepare_user'
+  [1m[36mSponser Load (2.0ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[36mEmployee Load (1.6ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[36mIdeamaker Load (1.7ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+Completed 422 Unprocessable Entity in 56ms (Views: 0.5ms | ActiveRecord: 7.9ms | Allocations: 5068)
+
+
+Started POST "/api/v1/users/2/profile" for ::1 at 2020-08-09 23:37:28 +0200
+Processing by Api::V1::ProfilesController#create as */*
+  Parameters: {"profile_type"=>3, "ideamaker"=>{"name"=>"instabug", "addree"=>"caire", "Gander"=>"male", "mobile"=>"002151061001310", "interstingfield"=>"gdfdgdfg0", "ideamakerBio"=>"ssdfasdasdasdasdasdsada", "Website"=>"dwqdawdasdasdasdasd", "size"=>"5", "ownernaem"=>"asdasdasdas", "ownerphono"=>"asdasdasdasd", "owneraddress"=>"dasdasdasdasdasdas", "companyemail"=>"sadasdsadasdasdasd", "qualifiction"=>"asadsdas"}, "id"=>"2", "profile"=>{"profile_type"=>3, "ideamaker"=>{"name"=>"instabug", "addree"=>"caire", "Gander"=>"male", "mobile"=>"002151061001310", "interstingfield"=>"gdfdgdfg0", "ideamakerBio"=>"ssdfasdasdasdasdasdsada", "Website"=>"dwqdawdasdasdasdasd", "size"=>"5", "ownernaem"=>"asdasdasdas", "ownerphono"=>"asdasdasdasd", "owneraddress"=>"dasdasdasdasdasdas", "companyemail"=>"sadasdsadasdasdasd", "qualifiction"=>"asadsdas"}}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:15:in `prepare_user'
+  [1m[36mSponser Load (1.0ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[36mEmployee Load (1.0ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[36mIdeamaker Load (1.0ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:26:in `profile?'
+  [1m[35m (1.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/profiles_controller.rb:23:in `create'
+  [1m[36mIdeamaker Create (1.4ms)[0m  [1m[32mINSERT INTO `ideamakers` (`name`, `addree`, `Gander`, `qualifiction`, `mobile`, `interstingfield`, `created_at`, `updated_at`, `user_id`, `ideamakerBio`, `Website`, `size`, `ownernaem`, `ownerphono`, `owneraddress`, `companyemail`) VALUES ('instabug', 'caire', 'male', 'asadsdas', '002151061001310', 'gdfdgdfg0', '2020-08-09 21:37:28.589549', '2020-08-09 21:37:28.589549', 2, 'ssdfasdasdasdasdasdsada', 'dwqdawdasdasdasdasd', 5, 'asdasdasdas', 'asdasdasdasd', 'dasdasdasdasdasdas', 'sadasdsadasdasdasd')[0m
+  ↳ app/controllers/api/v1/profiles_controller.rb:23:in `create'
+  [1m[35m (7.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/profiles_controller.rb:23:in `create'
+Completed 201 Created in 62ms (Views: 1.8ms | ActiveRecord: 15.4ms | Allocations: 7253)
+
+
+Started POST "/api/v1/jobs" for ::1 at 2020-08-09 23:41:19 +0200
+Processing by Api::V1::JobsController#create as */*
+  Parameters: {"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription", "job"=>{"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mSponser Load (0.5ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:33:in `user_type'
+  [1m[36mEmployee Load (0.5ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:34:in `user_type'
+  [1m[36mIdeamaker Load (0.5ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:35:in `user_type'
+Completed 500 Internal Server Error in 42ms (ActiveRecord: 5.8ms | Allocations: 17165)
+
+
+  
+NoMethodError (undefined method `country' for #<Job:0x00005563963141c0>):
+  
+app/controllers/api/v1/jobs_controller.rb:20:in `create'
+Started POST "/api/v1/jobs" for ::1 at 2020-08-09 23:42:59 +0200
+Processing by Api::V1::JobsController#create as */*
+  Parameters: {"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription", "job"=>{"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mSponser Load (0.4ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:33:in `user_type'
+  [1m[36mEmployee Load (0.4ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:34:in `user_type'
+  [1m[36mIdeamaker Load (0.8ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:35:in `user_type'
+Completed 500 Internal Server Error in 64ms (ActiveRecord: 14.7ms | Allocations: 39000)
+
+
+  
+NoMethodError (undefined method `country' for #<Job:0x0000556397418700>):
+  
+app/controllers/api/v1/jobs_controller.rb:20:in `create'
+Started POST "/api/v1/jobs" for ::1 at 2020-08-09 23:43:32 +0200
+Processing by Api::V1::JobsController#create as */*
+  Parameters: {"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription", "job"=>{"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mSponser Load (0.6ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:33:in `user_type'
+  [1m[36mEmployee Load (0.7ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:34:in `user_type'
+  [1m[36mIdeamaker Load (0.6ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:35:in `user_type'
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 2.5ms | Allocations: 6119)
+
+
+  
+NoMethodError (undefined method `country' for #<Job:0x0000556397ab45f0>):
+  
+app/controllers/api/v1/jobs_controller.rb:20:in `create'
+Started POST "/api/v1/jobs" for ::1 at 2020-08-09 23:43:37 +0200
+  [1m[35m (0.5ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Api::V1::JobsController#create as */*
+  Parameters: {"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription", "job"=>{"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mSponser Load (0.6ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:33:in `user_type'
+  [1m[36mEmployee Load (0.6ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:34:in `user_type'
+  [1m[36mIdeamaker Load (0.5ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:35:in `user_type'
+Completed 500 Internal Server Error in 94ms (ActiveRecord: 17.7ms | Allocations: 45728)
+
+
+  
+NoMethodError (undefined method `country' for #<Job:0x0000559435308350>):
+  
+app/controllers/api/v1/jobs_controller.rb:20:in `create'
+Started POST "/api/v1/jobs" for ::1 at 2020-08-09 23:45:18 +0200
+  [1m[35m (0.4ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Api::V1::JobsController#create as */*
+  Parameters: {"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription", "job"=>{"title"=>"flutter developer", "jtype"=>"parttime", "catagory"=>"development", "address"=>"cairo", "salary"=>"2500", "gander"=>"male", "qualification"=>"cs shrouk", "experience"=>"flutter .java . c#", "description"=>"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '1RpWp_d_cxT6NmyHY4T6' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mSponser Load (0.4ms)[0m  [1m[34mSELECT `sponsers`.* FROM `sponsers` WHERE `sponsers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:33:in `user_type'
+  [1m[36mEmployee Load (0.7ms)[0m  [1m[34mSELECT `employees`.* FROM `employees` WHERE `employees`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:34:in `user_type'
+  [1m[36mIdeamaker Load (0.6ms)[0m  [1m[34mSELECT `ideamakers`.* FROM `ideamakers` WHERE `ideamakers`.`user_id` = 2 LIMIT 1[0m
+  ↳ app/models/user.rb:35:in `user_type'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:20:in `create'
+  [1m[36mJob Create (0.4ms)[0m  [1m[32mINSERT INTO `jobs` (`title`, `jtype`, `catagory`, `address`, `salary`, `gander`, `qualification`, `experience`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('flutter developer', 'parttime', 'development', 'cairo', '2500', 'male', 'cs shrouk', 'flutter .java . c#', 'descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription', '2020-08-09 21:45:19.015729', '2020-08-09 21:45:19.015729', 2)[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:20:in `create'
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:20:in `create'
+Completed 201 Created in 82ms (Views: 0.5ms | ActiveRecord: 21.1ms | Allocations: 45918)
+
+
